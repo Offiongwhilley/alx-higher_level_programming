@@ -1,20 +1,20 @@
 #!/usr/bin/node
 
-function second (myArray) {
-  if (myArray.length === 2 || myArray.length === 3) { return (0); }
+let biggest = 0;
+let i;
+const arrayNumbers = [];
 
-  let max = myArray[2];
-  let secondMax = myArray[3];
-
-  for (let i = 2; i < myArray.length; i++) {
-    if (myArray[i] > max) {
-      secondMax = max;
-      max = myArray[i];
-    } else if (myArray[i] > secondMax && myArray[i] < max) {
-      secondMax = myArray[i];
-    }
+for (i = 2; i < process.argv.length; i++) {
+  if (Number.isNaN(parseInt(process.argv[i])) === false) {
+    arrayNumbers[i - 2] = parseInt(process.argv[i]);
   }
-  return (secondMax);
 }
 
-console.log(second(process.argv));
+if (arrayNumbers.length > 1) {
+  biggest = Math.max.apply(null, arrayNumbers);
+  i = arrayNumbers.indexOf(biggest);
+  arrayNumbers[i] = -Infinity;
+  biggest = Math.max.apply(null, arrayNumbers);
+}
+
+console.log(biggest);
